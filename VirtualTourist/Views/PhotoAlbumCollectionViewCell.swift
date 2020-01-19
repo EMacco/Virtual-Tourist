@@ -7,7 +7,24 @@
 //
 
 import UIKit
+import CoreData
 
 class PhotoAlbumCollectionViewCell: UICollectionViewCell {
-    @IBOutlet weak var imageVIew: UIImageView!
+    var photo: Photo! {
+        didSet {
+            loadCellImage()
+        }
+    }
+    @IBOutlet weak var pinImageView: UIImageView!
+    
+    func loadCellImage() {
+        if let imageData = photo.image {
+            self.pinImageView.image = UIImage(data: imageData)
+        }
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        pinImageView.image = #imageLiteral(resourceName: "placeholderImage")
+    }
 }

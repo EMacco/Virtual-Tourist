@@ -13,7 +13,7 @@ import CoreData
 class TravelLocationsViewController: UIViewController, TravelMapViewDelegate {
     
     var pins =  [Pin]()
-    var dataController: DataController!
+    var dataController: DataController! = DataController.shared
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var hintViewHeightConstraint: NSLayoutConstraint!
     var currentAnnotation: PinAnnotation?
@@ -94,19 +94,10 @@ class TravelLocationsViewController: UIViewController, TravelMapViewDelegate {
         let touchMapCoordinate = mapView.convert(touchPoint, toCoordinateFrom: mapView)
         
         fetchAddressNameFrom(location: touchMapCoordinate) { [weak self] address in
-            if let pin = self?.addPin(to: touchMapCoordinate, title: address) {
+            if let pin = CoreDataHelper.addPin(to: touchMapCoordinate, title: address) {
                 self?.addAnnotation(to: pin)
             }
         }
-    }
-    
-    func addPin(to location: CLLocationCoordinate2D, title: String?) -> Pin {
-        let pin = Pin(context: dataController.viewContext)
-        pin.latitude = location.latitude
-        pin.longitude = location.longitude
-        pin.name = title ?? "Unknown location"
-        try? dataController.viewContext.save()
-        return pin
     }
     
     func updateCameraSavedZoom() {
@@ -128,7 +119,6 @@ extension TravelLocationsViewController: MKMapViewDelegate {
             let controller = self.storyboard?.instantiateViewController(identifier: "photoAlbumVC") as! PhotoAlbumViewController
             controller.region = mapView.region
             controller.pin = currentAnnotation.pin
-            controller.dataController = self.dataController
             controller.travelMapDelegate = self
             self.navigationController?.pushViewController(controller, animated: true)
         }

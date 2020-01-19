@@ -10,7 +10,8 @@ import Foundation
 import CoreData
 
 class DataController {
-    
+    static let shared = DataController(modelName: "VirtualTourist")
+
     let persistentContainer:NSPersistentContainer
     
     var viewContext: NSManagedObjectContext {
@@ -19,7 +20,7 @@ class DataController {
     
     let backgroundContext: NSManagedObjectContext!
     
-    init(modelName:String) {
+    private init(modelName:String) {
         persistentContainer = NSPersistentContainer(name: modelName)
         
         backgroundContext = persistentContainer.newBackgroundContext()
