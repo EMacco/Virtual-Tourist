@@ -10,7 +10,7 @@ import Foundation
 
 enum FlickrParams: String {
     case method = "flickr.photos.search"
-    case key = "5b1d4190ae88ee47d3fa8b1a74b2855e" // Add API Key
+    case key = "" // Add API Key
     case format = "json"
     case noJSONCallback = "1"
     case perPage = "100"

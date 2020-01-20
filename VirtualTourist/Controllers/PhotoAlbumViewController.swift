@@ -96,11 +96,17 @@ class PhotoAlbumViewController: UIViewController {
     }
     
     func handleFlickrImagesResponse(value: Photos?, error: Error?) {
+        if let error = error {
+            collectionView.setEmptyMessage("Error fetching images")
+            return ProgressHUD.showError(error.localizedDescription)
+        }
+        
         ProgressHUD.dismiss()
         guard let value = value else { return }
         if value.photos.count == 0 {
             collectionView.setEmptyMessage("No images found for this location")
             pin.totalCollections = -1
+            try? dataController.viewContext.save()
         } else {
             collectionView.restore()
             if let total = Int16(value.total) {
@@ -130,8 +136,6 @@ class PhotoAlbumViewController: UIViewController {
     
     // MARK:- Refresh Collection
     @IBAction func refreshBtnClicked(_ sender: UIButton) {
-        print("The current details are: \(pin.currentCollection) / \(pin.totalCollections)")
-        
         let currentPage = Int(pin.currentCollection)
         let total = Int(pin.totalCollections)
         var nextPage = currentPage + 1
