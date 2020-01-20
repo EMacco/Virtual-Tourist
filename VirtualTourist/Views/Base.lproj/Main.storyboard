@@ -205,6 +205,77 @@
             </objects>
             <point key="canvasLocation" x="1976.8115942028987" y="125.89285714285714"/>
         </scene>
+        <!--Image Preview View Controller-->
+        <scene sceneID="og7-rf-dPZ">
+            <objects>
+                <viewController storyboardIdentifier="imagePreviewVC" id="Pwh-s5-IYl" customClass="ImagePreviewViewController" customModule="VirtualTourist" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="7Wd-bb-W9X">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NeU-g0-p0Z">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G30-s1-hln">
+                                <rect key="frame" x="358" y="52" width="40" height="40"/>
+                                <color key="backgroundColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="6vL-ae-X1n"/>
+                                    <constraint firstAttribute="width" constant="40" id="O8U-8t-X6u"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" image="trash" catalog="system"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <integer key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="deleteImageBtnClicked:" destination="Pwh-s5-IYl" eventType="touchUpInside" id="cId-Ii-gHt"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xIv-Uo-94X">
+                                <rect key="frame" x="16" y="52" width="40" height="40"/>
+                                <color key="backgroundColor" red="0.1058991626" green="0.69789606329999998" blue="0.89414888619999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="Y74-Zx-Nob"/>
+                                    <constraint firstAttribute="height" constant="40" id="hXU-q5-qWl"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" image="xmark" catalog="system"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <integer key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="backBtnClicked:" destination="Pwh-s5-IYl" eventType="touchUpInside" id="rRE-Qx-t02"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="TZ5-7P-W6G" firstAttribute="trailing" secondItem="G30-s1-hln" secondAttribute="trailing" constant="16" id="Qab-UW-cEZ"/>
+                            <constraint firstItem="xIv-Uo-94X" firstAttribute="leading" secondItem="TZ5-7P-W6G" secondAttribute="leading" constant="16" id="RzY-Yg-zgq"/>
+                            <constraint firstItem="NeU-g0-p0Z" firstAttribute="top" secondItem="7Wd-bb-W9X" secondAttribute="top" id="Zgc-yx-Rz7"/>
+                            <constraint firstItem="G30-s1-hln" firstAttribute="top" secondItem="TZ5-7P-W6G" secondAttribute="top" constant="8" id="exu-0P-GfO"/>
+                            <constraint firstAttribute="bottom" secondItem="NeU-g0-p0Z" secondAttribute="bottom" id="gcH-69-68A"/>
+                            <constraint firstItem="NeU-g0-p0Z" firstAttribute="leading" secondItem="TZ5-7P-W6G" secondAttribute="leading" id="ic2-pZ-FHi"/>
+                            <constraint firstItem="NeU-g0-p0Z" firstAttribute="trailing" secondItem="TZ5-7P-W6G" secondAttribute="trailing" id="ySn-hS-mW5"/>
+                            <constraint firstItem="xIv-Uo-94X" firstAttribute="top" secondItem="TZ5-7P-W6G" secondAttribute="top" constant="8" id="ze6-z9-uST"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="TZ5-7P-W6G"/>
+                    </view>
+                    <connections>
+                        <outlet property="backBtn" destination="xIv-Uo-94X" id="k2N-mG-9tO"/>
+                        <outlet property="deleteBtn" destination="G30-s1-hln" id="o8l-bg-kf1"/>
+                        <outlet property="imageView" destination="NeU-g0-p0Z" id="9Ra-ba-MVk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ebq-Yg-TvP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2818.840579710145" y="125.89285714285714"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="irf-oP-Vfb">
             <objects>
@@ -229,5 +300,6 @@
         <image name="arrow.left" catalog="system" width="64" height="48"/>
         <image name="placeholderImage" width="65" height="65"/>
         <image name="trash" catalog="system" width="60" height="64"/>
+        <image name="xmark" catalog="system" width="64" height="56"/>
     </resources>
 </document>

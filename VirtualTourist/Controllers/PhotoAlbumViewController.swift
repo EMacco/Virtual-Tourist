@@ -25,6 +25,7 @@ class PhotoAlbumViewController: UIViewController {
     var travelMapDelegate: TravelMapViewDelegate!
     var fetchedResultsController:NSFetchedResultsController<Photo>!
     private var blockOperations: [BlockOperation] = []
+    let imagePreviewVCIdentifier = "imagePreviewVC"
     
     fileprivate func setupFetchedResultsController() {
         let fetchRequest:NSFetchRequest<Photo> = Photo.fetchRequest()
@@ -62,6 +63,22 @@ class PhotoAlbumViewController: UIViewController {
             }
         }
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupFetchedResultsController()
+        if let indexPaths = collectionView.indexPathsForSelectedItems {
+            for indexPath in indexPaths {
+                collectionView.deselectItem(at: indexPath, animated: false)
+            }
+            collectionView.reloadItems(at: indexPaths)
+        }
+        
+//        if let indexPath = tableView.indexPathForSelectedRow {
+//            tableView.deselectRow(at: indexPath, animated: false)
+//            tableView.reloadRows(at: [indexPath], with: .fade)
+//        }
     }
     
     func addShadow(to button: UIButton) {
@@ -149,9 +166,8 @@ class PhotoAlbumViewController: UIViewController {
     }
     
     func deletePin() {
-        dataController.viewContext.delete(pin)
         travelMapDelegate.deletePin(pin)
-        try? dataController.viewContext.save()
+        CoreDataHelper.delete(pin)
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -185,6 +201,13 @@ extension PhotoAlbumViewController: UICollectionViewDelegate, UICollectionViewDa
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let cellSideLength = (collectionView.frame.width/3) - 1
         return CGSize(width: cellSideLength, height: cellSideLength)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let controller = storyboard?.instantiateViewController(identifier: imagePreviewVCIdentifier) as! ImagePreviewViewController
+        controller.modalPresentationStyle = .fullScreen
+        controller.photo = fetchedResultsController.object(at: indexPath)
+        self.present(controller, animated: true, completion: nil)
     }
 }
 

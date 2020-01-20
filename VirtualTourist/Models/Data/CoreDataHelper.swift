@@ -45,4 +45,14 @@ struct CoreDataHelper {
             try? backgroundContext.save()
         }
     }
+    
+    static func delete(_ pin: Pin) {
+        dataController.viewContext.delete(pin)
+        try? dataController.viewContext.save()
+    }
+    
+    static func delete(_ image: Photo) {
+        dataController.viewContext.delete(image)
+        try? dataController.viewContext.save()
+    }
 }
